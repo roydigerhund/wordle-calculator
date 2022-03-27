@@ -1,6 +1,5 @@
 import { assocPath } from 'ramda';
-import { useEffect } from 'react';
-import { ActionFunction, Form, Link, useActionData, useTransition } from 'remix';
+import { ActionFunction, Link, useActionData } from 'remix';
 import { classNames } from '~/utils/class-names';
 import { allWords } from '~/utils/words';
 
@@ -34,21 +33,6 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Index() {
   const data = useActionData();
-  const { state } = useTransition();
-
-  // Add Character
-  // Input for Character, only allow characters from listOfChars
-  // 5 Checkboxes to mark position where the character is not
-
-  // scroll to result
-  useEffect(() => {
-    if (data?.words?.length) {
-      const element = document.getElementById('result');
-      if (element) element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [data?.words]);
-
-  const isSubmitting = state === 'submitting';
 
   return (
     <div className="bg-white py-8 px-4 sm:px-6 lg:px-8 lg:py-16">
@@ -65,8 +49,8 @@ export default function Index() {
           </p>
         </div>
         <div className="mt-8 xs:mt-12">
-          <Form method="post">
-            <fieldset className="flex flex-col gap-y-6" disabled={isSubmitting}>
+          <form method="post">
+            <fieldset className="flex flex-col gap-y-6">
               <div className="flex flex-col gap-y-2 xxs:gap-y-3 xs:gap-y-4">
                 {Array(5)
                   .fill(0)
@@ -125,10 +109,10 @@ export default function Index() {
                   'inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
                 )}
               >
-                {isSubmitting ? 'Loading …' : 'Get Words'}
+                Get Words
               </button>
             </fieldset>
-          </Form>
+          </form>
         </div>
         {!!data?.words?.length && (
           <div className="mt-8 scroll-mt-8 xs:mt-12 xs:scroll-mt-12" id="result">
