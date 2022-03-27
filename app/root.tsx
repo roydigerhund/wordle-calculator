@@ -1,4 +1,4 @@
-import type { MetaFunction } from 'remix';
+import { MetaFunction, useMatches } from 'remix';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix';
 import styles from './styles/app.css';
 
@@ -28,6 +28,11 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+  const matches = useMatches();
+
+  // If at least one route wants to hydrate, this will return true
+  const includeScripts = matches.some((match) => match.handle?.hydrate);
+
   return (
     <html lang="en">
       <head>
@@ -37,7 +42,7 @@ export default function App() {
       <body>
         <Outlet />
         <ScrollRestoration />
-        <Scripts />
+        {includeScripts && <Scripts />}
         <LiveReload />
       </body>
     </html>

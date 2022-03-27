@@ -4,8 +4,6 @@ import { ActionFunction, Form, Link, useActionData, useTransition } from 'remix'
 import { classNames } from '~/utils/class-names';
 import { allWords } from '~/utils/words';
 
-export const handle = { hydrate: true };
-
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const rawData = Array.from(formData.entries()).reduce((acc, cur) => {
@@ -56,7 +54,12 @@ export default function Index() {
     <div className="bg-white py-8 px-4 sm:px-6 lg:px-8 lg:py-16">
       <div className="relative mx-auto max-w-xl">
         <div className="text-center">
-          <Link to="/js-disabled"><h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Wordle Calculator</h2></Link>
+          <div className="mb-4 inline-block rounded-full uppercase font-medium bg-indigo-100 py-1 px-2 text-xs text-indigo-600">
+            Zero JS Demo
+          </div>
+          <Link to="/">
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Wordle Calculator</h2>
+          </Link>
           <p className="mt-4 text-lg leading-6 text-gray-500">
             Type in characters you know and select at which places they can't be.
           </p>
