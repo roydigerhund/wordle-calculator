@@ -17,6 +17,7 @@ export function links() {
 export const meta: MetaFunction = () => ({
   charset: 'utf-8',
   title: 'Wordle Calculator',
+  description: "Type in characters you know and select at which places they can't be.",
   viewport: 'width=device-width,initial-scale=1',
   'apple-mobile-web-app-capable': 'Wordle Calc',
   'apple-mobile-web-app-title': 'Wordle Calc',
