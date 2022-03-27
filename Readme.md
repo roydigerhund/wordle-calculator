@@ -1,14 +1,15 @@
 # Wordle Calculator
 
 This little programm will output how often and in which places characters occur in the list of wordle words.
+It also provided a simple solution finder.
 
 ## Setup
 
 `yarn`
 
-## Run
+## Run locally
 
-`yarn start`
+`yarn dev`
 
 ## Result of Top 5 Chars
 

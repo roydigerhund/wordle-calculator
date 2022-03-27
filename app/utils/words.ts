@@ -12949,3 +12949,5 @@ export const allowed = [
   "zymes",
   "zymic",
 ];
+
+export const allWords = [...wins, ...allowed];
