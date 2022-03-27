@@ -38,7 +38,7 @@ export default function Index() {
   // 5 Checkboxes to mark position where the character is not
 
   return (
-    <div className="bg-white py-16 px-4 sm:px-6 lg:px-8 lg:py-24">
+    <div className="bg-white py-8 px-4 sm:px-6 lg:px-8 lg:py-16">
       <div className="relative mx-auto max-w-xl">
         <div className="text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Worlde Calculator</h2>
@@ -46,49 +46,49 @@ export default function Index() {
             Type in characters you know and select at which places they can't be.
           </p>
         </div>
-        <div className="mt-12">
+        <div className="mt-8 xs:mt-12">
           <Form method="post" className="flex flex-col gap-y-6">
-            {Array(5)
-              .fill(0)
-              .map((_, i) => (
-                <div key={i} className="flex flex-wrap items-end gap-2 xs:flex-nowrap">
-                  <div className="w-full shrink">
-                    <label htmlFor={`${i}.char`} className="block text-sm font-medium text-gray-700">
-                      Character
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        name={`${i}.char`}
-                        id={`${i}.char`}
-                        placeholder="Character"
-                        maxLength={1}
-                        autoCorrect="off"
-                        className="block w-full rounded-md border-gray-300 py-3 px-4 uppercase shadow-sm placeholder-shown:normal-case focus:border-indigo-500 focus:ring-indigo-500"
-                      />
+            <div className="flex flex-col gap-y-4">
+              {Array(5)
+                .fill(0)
+                .map((_, i) => (
+                  <div key={i} className="flex flex-wrap items-end gap-2 xs:flex-nowrap">
+                    <div className="w-full shrink">
+                      <div className="mt-1">
+                        <input
+                          type="text"
+                          name={`${i}.char`}
+                          placeholder="Character"
+                          maxLength={1}
+                          autoCorrect="off"
+                          className="block w-full rounded-md border-gray-300 py-2 px-3 uppercase shadow-sm placeholder-shown:normal-case focus:border-indigo-500 focus:ring-indigo-500 xs:py-3 xs:px-4"
+                        />
+                      </div>
+                    </div>
+                    <div className='flex justify-between gap-2 grow'>
+                      {Array(5)
+                        .fill(0)
+                        .map((_, j) => (
+                          <label key={j}>
+                            <input type="checkbox" name={`${i}.${j}`} className="peer hidden" />
+                            <span className="box-content flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-gray-300 text-gray-300 peer-checked:border-red-400 peer-checked:bg-red-400 peer-checked:text-white xs:h-12 xs:w-12">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="block h-8 w-8"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                              >
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                            </span>
+                          </label>
+                        ))}
                     </div>
                   </div>
-                  {Array(5)
-                    .fill(0)
-                    .map((_, j) => (
-                      <label key={j} className="shrink grow">
-                        <input type="checkbox" name={`${i}.${j}`} className="peer hidden" />
-                        <span className="box-content flex h-12 w-full min-w-[48px] cursor-pointer items-center justify-center rounded-md border border-gray-300 text-gray-300 peer-checked:border-red-400 peer-checked:bg-red-400 peer-checked:text-white">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="block h-8 w-8"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </span>
-                      </label>
-                    ))}
-                </div>
-              ))}
+                ))}
+            </div>
             <div>
               <label htmlFor="notAllowed" className="block text-sm font-medium text-gray-700">
                 Not allowed
@@ -115,7 +115,7 @@ export default function Index() {
           </Form>
         </div>
         {!!data?.words?.length && (
-          <div className="mt-12">
+          <div className="mt-8 xs:mt-12">
             <h3 className="text-lg font-medium text-gray-900">Words</h3>
             <div className="mt-4 flex flex-wrap gap-2">
               {data.words.map((word: string) => (
