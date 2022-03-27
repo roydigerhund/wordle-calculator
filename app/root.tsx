@@ -15,7 +15,7 @@ export function links() {
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Worlde Calculator",
+  title: "Wordle Calculator",
   viewport: "width=device-width,initial-scale=1",
 });
 

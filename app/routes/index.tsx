@@ -54,7 +54,7 @@ export default function Index() {
     <div className="bg-white py-8 px-4 sm:px-6 lg:px-8 lg:py-16">
       <div className="relative mx-auto max-w-xl">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Worlde Calculator</h2>
+          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Wordle Calculator</h2>
           <p className="mt-4 text-lg leading-6 text-gray-500">
             Type in characters you know and select at which places they can't be.
           </p>
