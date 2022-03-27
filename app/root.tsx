@@ -1,12 +1,5 @@
-import type { MetaFunction } from "remix";
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration
-} from "remix";
+import type { MetaFunction } from 'remix';
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix';
 import styles from './styles/app.css';
 
 export function links() {
@@ -14,9 +7,10 @@ export function links() {
 }
 
 export const meta: MetaFunction = () => ({
-  charset: "utf-8",
-  title: "Wordle Calculator",
-  viewport: "width=device-width,initial-scale=1",
+  charset: 'utf-8',
+  title: 'Wordle Calculator',
+  viewport: 'width=device-width,initial-scale=1',
+  'apple-mobile-web-app-capable': 'yes',
 });
 
 export default function App() {
