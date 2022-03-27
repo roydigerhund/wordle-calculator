@@ -29,7 +29,7 @@ export const action: ActionFunction = async ({ request }) => {
     })
     .sort((a, b) => a.localeCompare(b));
 
-  return { words };
+  return { words, rawData };
 };
 
 export default function Index() {
@@ -73,6 +73,7 @@ export default function Index() {
                         placeholder="A-Z"
                         maxLength={1}
                         autoCorrect="off"
+                        defaultValue={data?.rawData[i]?.char}
                         className="peer mt-1 block w-full shrink rounded-md border-gray-300 py-2 px-2 uppercase placeholder-gray-400 shadow-sm placeholder-shown:normal-case focus:border-indigo-500 focus:ring-indigo-500 xxs:py-3 xxs:px-4"
                       />
                       {Array(5)
@@ -82,7 +83,12 @@ export default function Index() {
                             key={j}
                             className="peer-placeholder-shown:pointer-events-none peer-placeholder-shown:opacity-30"
                           >
-                            <input type="checkbox" name={`${i}.${j}`} className="peer hidden" />
+                            <input
+                              type="checkbox"
+                              name={`${i}.${j}`}
+                              defaultChecked={!!data?.rawData[i]?.[j]}
+                              className="peer hidden"
+                            />
                             <span className="box-content flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-gray-400 text-gray-400 peer-checked:border-red-400 peer-checked:bg-red-400 peer-checked:text-white xxs:h-12 xxs:w-12">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +126,7 @@ export default function Index() {
           </Form>
         </div>
         {!!data?.words?.length && (
-          <div className="mt-8 xs:mt-12 scroll-mt-8 xs:scroll-mt-12" id="result">
+          <div className="mt-8 scroll-mt-8 xs:mt-12 xs:scroll-mt-12" id="result">
             <h3 className="text-lg font-medium text-gray-900">Possible Words</h3>
             <div className="mt-4 flex flex-wrap gap-2">
               {data.words.map((word: string) => (
