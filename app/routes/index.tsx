@@ -6,7 +6,7 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const rawData = Array.from(formData.entries()).reduce((acc, cur) => {
     const [key, value] = cur;
-    return assocPath(key.split('.'), value, acc);
+    return assocPath(key.split('.'), value.toString().toLowerCase(), acc);
   }, {}) as any;
 
   const words = allWords
@@ -63,6 +63,7 @@ export default function Index() {
                         id={`${i}.char`}
                         placeholder="Character"
                         maxLength={1}
+                        autoCorrect="off"
                         className="block w-full rounded-md border-gray-300 py-3 px-4 uppercase shadow-sm placeholder-shown:normal-case focus:border-indigo-500 focus:ring-indigo-500"
                       />
                     </div>
@@ -97,8 +98,9 @@ export default function Index() {
                   type="text"
                   name="notAllowed"
                   id="notAllowed"
+                  autoCorrect="off"
                   placeholder="Type in not allowed characters"
-                  className="block w-full rounded-md border-gray-300 py-3 px-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="block w-full rounded-md border-gray-300 py-3 px-4 uppercase shadow-sm placeholder-shown:normal-case focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
             </div>
