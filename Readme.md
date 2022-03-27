@@ -3,7 +3,7 @@
 This little programm will output how often and in which places characters occur in the list of wordle words.
 It also provided a simple solution finder.
 
-Deployed version at wordle-calculator.vercel.app
+Deployed version at [wordle-calculator.vercel.app](https://wordle-calculator.vercel.app)
 
 ## Setup
 
