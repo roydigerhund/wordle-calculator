@@ -76,9 +76,9 @@ export default function Index() {
                               type="checkbox"
                               name={`${i}.${j}`}
                               defaultChecked={!!data?.rawData[i]?.[j]}
-                              className="peer hidden"
+                              className="peer w-10 h-10"
                             />
-                            <span className="box-content flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-gray-400 text-gray-400 peer-checked:border-red-400 peer-checked:bg-red-400 peer-checked:text-white xxs:h-12 xxs:w-12">
+                            {/* <span className="box-content flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-gray-400 text-gray-400 peer-checked:border-red-400 peer-checked:bg-red-400 peer-checked:text-white xxs:h-12 xxs:w-12">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="block h-8 w-8"
@@ -89,7 +89,7 @@ export default function Index() {
                               >
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                               </svg>
-                            </span>
+                            </span> */}
                           </label>
                         ))}
                     </div>
