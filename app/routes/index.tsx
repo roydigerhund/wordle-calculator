@@ -25,9 +25,9 @@ export const action: ActionFunction = async ({ request }) => {
     .filter((word) => {
       if (rawData.notAllowed.split('').some((c: string) => word.includes(c))) return false;
       for (let index = 0; index < 5; index++) {
-        const char = rawData[index].char;
+        const chars = rawData[index].chars || '';
         const green = !!rawData[index].green;
-        if (char) {
+        for (const char of chars) {
           if (!word.includes(char)) return false;
           if (green && word.indexOf(char) !== index) return false;
           if (!green && word.indexOf(char) === index) return false;
@@ -74,29 +74,29 @@ export default function Index() {
         <div className="mt-8 xs:mt-12">
           <Form method="post">
             <fieldset className="flex flex-col gap-y-6" disabled={isSubmitting}>
-              <div className="flex justify-between gap-y-2 xxs:gap-x-3 xs:gap-x-4">
+              <div className="flex justify-between gap-x-1.5 xxs:gap-x-3 xs:gap-x-4">
                 {Array(5)
                   .fill(0)
                   .map((_, i) => (
-                    <div key={i} className="flex flex-col items-end gap-1.5 xxs:gap-3">
+                    <div key={i} className="flex flex-1 flex-col items-end gap-1.5 xxs:gap-3">
                       <input
                         type="text"
-                        name={`${i}.char`}
+                        name={`${i}.chars`}
                         placeholder="A-Z"
-                        pattern='[A-Za-z]{1}'
-                        maxLength={1}
+                        pattern="[A-Za-z]{0,4}"
+                        maxLength={4}
                         autoCorrect="off"
-                        defaultValue={data?.rawData[i]?.char}
-                        className="peer box-content block h-10 w-10 shrink-0 rounded-md border-gray-300 p-0 text-center uppercase placeholder-gray-400 shadow-sm placeholder-shown:normal-case focus:border-indigo-500 focus:ring-indigo-500 xxs:h-12 xxs:w-12"
+                        defaultValue={data?.rawData[i]?.chars}
+                        className="peer block h-10 w-full shrink-0 rounded-md border-gray-300 p-0 text-center uppercase placeholder-gray-400 shadow-sm placeholder-shown:normal-case focus:border-indigo-500 focus:ring-indigo-500 xxs:h-12"
                       />
-                      <label className="rounded-md border border-white peer-placeholder-shown:pointer-events-none peer-placeholder-shown:border-gray-400 peer-placeholder-shown:child:opacity-0">
+                      <label className="relative h-10 w-full rounded-md peer-placeholder-shown:pointer-events-none peer-placeholder-shown:bg-gray-200 peer-placeholder-shown:child:opacity-0 xxs:h-12">
                         <input
                           type="checkbox"
                           name={`${i}.green`}
                           defaultChecked={!!data?.rawData[i]?.green}
                           className="peer hidden"
                         />
-                        <span className="box-content flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-yellow-500 text-gray-400 peer-checked:border-green-500 peer-checked:bg-green-500 xxs:h-12 xxs:w-12" />
+                        <span className="absolute inset-0 cursor-pointer rounded-md bg-yellow-500 peer-checked:border-green-500 peer-checked:bg-green-500" />
                       </label>
                     </div>
                   ))}
