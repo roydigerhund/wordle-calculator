@@ -30,6 +30,7 @@ export const action: ActionFunction = async ({ request }) => {
         if (char) {
           if (!word.includes(char)) return false;
           if (green && word.indexOf(char) !== index) return false;
+          if (!green && word.indexOf(char) === index) return false;
         }
       }
       return true;
