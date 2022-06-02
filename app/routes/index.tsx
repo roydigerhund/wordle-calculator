@@ -92,7 +92,7 @@ export default function Index() {
                         <input
                           type="checkbox"
                           name={`${i}.green`}
-                          defaultChecked={!!data?.rawData[i]?.value}
+                          defaultChecked={!!data?.rawData[i]?.green}
                           className="peer hidden"
                         />
                         <span className="box-content flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-yellow-500 text-gray-400 peer-checked:border-green-500 peer-checked:bg-green-500 xxs:h-12 xxs:w-12" />
