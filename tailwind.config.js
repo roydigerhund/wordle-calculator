@@ -12,10 +12,17 @@ module.exports = {
       lg: '1024px',
       xl: '1280px',
       '2xl': '1536px',
-      'is-touch': {'raw': '(hover: none), (pointer: coarse)'},
-      'is-hover': {'raw': '(hover: hover) and (pointer: fine)'},
+      'is-touch': { raw: '(hover: none), (pointer: coarse)' },
+      'is-hover': { raw: '(hover: hover) and (pointer: fine)' },
     },
   },
   variants: {},
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/aspect-ratio')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+    function ({ addVariant }) {
+      addVariant('child', '& > *');
+      addVariant('child-hover', '& > *:hover');
+    },
+  ],
 };
