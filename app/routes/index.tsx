@@ -67,7 +67,7 @@ export default function Index() {
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Wordle Calculator</h2>
           </Link>
           <p className="mt-4 text-lg leading-6 text-gray-500">
-            Type in characters you know and select at which places they can't be.
+            Type in characters you know and select if they are in a green or yellow box.
           </p>
         </div>
         <div className="mt-8 xs:mt-12">
