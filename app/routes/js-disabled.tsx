@@ -97,6 +97,7 @@ export default function Index() {
                 id="notAllowed"
                 autoCorrect="off"
                 placeholder="Type in not allowed characters"
+                defaultValue={data?.rawData.notAllowed}
                 className="block w-full rounded-md border-gray-300 py-3 px-4 uppercase shadow-sm placeholder-shown:normal-case focus:border-indigo-500 focus:ring-indigo-500"
               />
               <button
