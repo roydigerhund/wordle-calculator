@@ -68,7 +68,7 @@ export default function Index() {
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Wordle Calculator</h2>
           </Link>
           <p className="mt-4 text-lg leading-6 text-gray-500">
-            Type in characters you know and select if they are in a green or yellow box.
+            Type in characters you know for specific locations and select if they are in a green or yellow box.
           </p>
         </div>
         <div className="mt-8 xs:mt-12">
@@ -124,11 +124,15 @@ export default function Index() {
           <div className="mt-8 scroll-mt-8 xs:mt-12 xs:scroll-mt-12" id="result">
             <h3 className="text-lg font-medium text-gray-900">Possible Words</h3>
             <div className="mt-4 flex flex-wrap gap-2">
-              {data.words.map((word: string) => (
-                <div key={word} className="flex items-center uppercase">
-                  {word}
-                </div>
-              ))}
+              {data.words.length ? (
+                data.words.map((word: string) => (
+                  <div key={word} className="flex items-center uppercase">
+                    {word}
+                  </div>
+                ))
+              ) : (
+                <div>No words found</div>
+              )}
             </div>
           </div>
         )}
