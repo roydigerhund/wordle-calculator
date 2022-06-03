@@ -6,21 +6,34 @@ import { allWords } from '~/utils/words';
 
 export const handle = { hydrate: true };
 
-export const action: ActionFunction = async ({ request }) => {
+type RawData = Record<
+  number,
+  {
+    chars: string;
+    color?: 'green';
+  }
+> & {
+  notAllowed: string;
+};
+
+type ActionReturnType = {
+  words: string[];
+  rawData: RawData;
+};
+
+export const action: ActionFunction = async ({ request }): Promise<ActionReturnType> => {
   const formData = await request.formData();
   const rawData = Array.from(formData.entries()).reduce((acc, cur) => {
     const [key, value] = cur;
     return assocPath(key.split('.'), value.toString().toLowerCase(), acc);
-  }, {}) as any;
-
-  console.log(rawData);
+  }, {}) as RawData;
 
   const words = allWords
     .filter((word) => {
       if (rawData.notAllowed.split('').some((c: string) => word.includes(c))) return false;
       for (let index = 0; index < 5; index++) {
         const chars = rawData[index].chars || '';
-        const green = !!rawData[index].green;
+        const green = rawData[index].color === 'green';
         for (const char of chars) {
           if (!word.includes(char)) return false;
           if (green && word.indexOf(char) !== index) return false;
@@ -37,12 +50,8 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Index() {
-  const data = useActionData();
+  const data = useActionData<ActionReturnType>();
   const { state } = useTransition();
-
-  // Add Character
-  // Input for Character, only allow characters from listOfChars
-  // 5 Checkboxes to mark position where the character is not
 
   // scroll to result
   useEffect(() => {
@@ -86,8 +95,9 @@ export default function Index() {
                       <label className="relative h-10 w-full rounded-md peer-placeholder-shown:pointer-events-none peer-placeholder-shown:bg-gray-200 peer-placeholder-shown:child:opacity-0 xxs:h-12">
                         <input
                           type="checkbox"
-                          name={`${i}.green`}
-                          defaultChecked={!!data?.rawData[i]?.green}
+                          name={`${i}.color`}
+                          value="green"
+                          defaultChecked={data?.rawData[i]?.color === 'green'}
                           className="peer hidden"
                         />
                         <span className="absolute inset-0 cursor-pointer rounded-md bg-yellow-500 peer-checked:border-green-500 peer-checked:bg-green-500" />
@@ -114,22 +124,23 @@ export default function Index() {
             </fieldset>
           </Form>
         </div>
-        {!!data?.words?.length ? (
-          <div className="mt-8 scroll-mt-8 xs:mt-12 xs:scroll-mt-12" id="result">
-            <h3 className="text-lg font-medium text-gray-900">Possible words</h3>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {data.words.map((word: string) => (
-                <div key={word} className="flex items-center uppercase">
-                  {word}
-                </div>
-              ))}
+        {!!data &&
+          (data.words?.length ? (
+            <div className="mt-8 scroll-mt-8 xs:mt-12 xs:scroll-mt-12" id="result">
+              <h3 className="text-lg font-medium text-gray-900">Possible words</h3>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {data.words.map((word: string) => (
+                  <div key={word} className="flex items-center uppercase">
+                    {word}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="mt-8 xs:mt-12">
-            <h3 className="text-lg font-medium text-gray-900">No words found</h3>
-          </div>
-        )}
+          ) : (
+            <div className="mt-8 xs:mt-12">
+              <h3 className="text-lg font-medium text-gray-900">No words found</h3>
+            </div>
+          ))}
       </div>
     </div>
   );
