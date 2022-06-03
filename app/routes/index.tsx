@@ -116,7 +116,7 @@ export default function Index() {
         </div>
         {!!data?.words?.length ? (
           <div className="mt-8 scroll-mt-8 xs:mt-12 xs:scroll-mt-12" id="result">
-            <h3 className="text-lg font-medium text-gray-900">Possible Words</h3>
+            <h3 className="text-lg font-medium text-gray-900">Possible words</h3>
             <div className="mt-4 flex flex-wrap gap-2">
               {data.words.map((word: string) => (
                 <div key={word} className="flex items-center uppercase">
