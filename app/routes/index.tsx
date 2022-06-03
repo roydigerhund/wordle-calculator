@@ -4,12 +4,6 @@ import { ActionFunction, Form, Link, useActionData, useTransition } from 'remix'
 import { classNames } from '~/utils/class-names';
 import { allWords } from '~/utils/words';
 
-// enum characterStates {
-//   WRONG = 'wrong',
-//   CORRECT = 'correct',
-//   WRONG_POSITION = 'wrong_position',
-// }
-
 export const handle = { hydrate: true };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -120,20 +114,20 @@ export default function Index() {
             </fieldset>
           </Form>
         </div>
-        {!!data?.words?.length && (
+        {!!data?.words?.length ? (
           <div className="mt-8 scroll-mt-8 xs:mt-12 xs:scroll-mt-12" id="result">
             <h3 className="text-lg font-medium text-gray-900">Possible Words</h3>
             <div className="mt-4 flex flex-wrap gap-2">
-              {data.words.length ? (
-                data.words.map((word: string) => (
-                  <div key={word} className="flex items-center uppercase">
-                    {word}
-                  </div>
-                ))
-              ) : (
-                <div>No words found</div>
-              )}
+              {data.words.map((word: string) => (
+                <div key={word} className="flex items-center uppercase">
+                  {word}
+                </div>
+              ))}
             </div>
+          </div>
+        ) : (
+          <div className="mt-8 xs:mt-12">
+            <h3 className="text-lg font-medium text-gray-900">No words found</h3>
           </div>
         )}
       </div>
