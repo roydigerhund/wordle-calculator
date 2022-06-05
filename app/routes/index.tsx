@@ -36,8 +36,8 @@ export const action: ActionFunction = async ({ request }): Promise<ActionReturnT
         const green = rawData[index].color === 'green';
         for (const char of chars) {
           if (!word.includes(char)) return false;
-          if (green && word.indexOf(char) !== index) return false;
-          if (!green && word.indexOf(char) === index) return false;
+          if (green && word[index] !== char) return false;
+          if (!green && word[index] === char) return false;
         }
       }
       return true;
